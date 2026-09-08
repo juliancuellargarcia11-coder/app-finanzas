@@ -1,0 +1,187 @@
+{
+  "app_name": "PinkBudget",
+  "personality": "1 iOS-Native structure with 6 Glass / Luxe premium finishes",
+  "personality_one_liner": "A premium, feminine, and elegant financial command center that feels like a modern luxury beauty brand meets a high-end fintech app.",
+  "color": {
+    "surface": "#FFF9FA",
+    "onSurface": "#2D1B22",
+    "surfaceSecondary": "#FFFFFF",
+    "onSurfaceSecondary": "#2D1B22",
+    "surfaceTertiary": "#FCE4EC",
+    "onSurfaceTertiary": "#880E4F",
+    "surfaceInverse": "#2D1B22",
+    "onSurfaceInverse": "#FFF9FA",
+    "brand": "#E91E63",
+    "onBrand": "#FFFFFF",
+    "brandPrimary": "#D81B60",
+    "onBrandPrimary": "#FFFFFF",
+    "brandSecondary": "#CE93D8",
+    "onBrandSecondary": "#2D1B22",
+    "brandTertiary": "#F8BBD0",
+    "onBrandTertiary": "#880E4F",
+    "success": "#66BB6A",
+    "onSuccess": "#FFFFFF",
+    "warning": "#FFA726",
+    "onWarning": "#FFFFFF",
+    "error": "#EC407A",
+    "onError": "#FFFFFF",
+    "info": "#AB47BC",
+    "onInfo": "#FFFFFF",
+    "border": "#F4E9EB",
+    "borderStrong": "#F06292",
+    "divider": "#F4E9EB",
+    "muted": "#8D7A80"
+  },
+  "dark_mode_colors_instruction": {
+    "surface": "#1D1418",
+    "onSurface": "#FFF9FA",
+    "surfaceSecondary": "#2A1E24",
+    "onSurfaceSecondary": "#FFF9FA",
+    "surfaceTertiary": "#3E2933",
+    "onSurfaceTertiary": "#F48FB1",
+    "surfaceInverse": "#FFF9FA",
+    "onSurfaceInverse": "#1D1418",
+    "brandPrimary": "#F48FB1",
+    "border": "#3E2933",
+    "divider": "#3E2933",
+    "muted": "#A8949A"
+  },
+  "typography": {
+    "displayFontFamily": "Fraunces",
+    "textFontFamily": "Manrope",
+    "scale": {
+      "sm": 12,
+      "base": 14,
+      "lg": 16,
+      "xl": 20,
+      "2xl": 24
+    }
+  },
+  "spacing": {
+    "rule": "Generous, thumb-friendly padding. Avoid dense data views; utilize whitespace to make the app feel approachable and high-end.",
+    "xs": 4,
+    "sm": 8,
+    "md": 12,
+    "lg": 16,
+    "xl": 24,
+    "2xl": 32,
+    "3xl": 48
+  },
+  "radius_tokens": {
+    "sm": 6,
+    "md": 12,
+    "lg": 20,
+    "pill": 999
+  },
+  "shadow_tier": "1",
+  "navigation": "bottom_tabs",
+  "icon_set": "Ionicons",
+  "glassmorphism": {
+    "enabled": true,
+    "do's": [
+      "Use frosted glass on the bottom tab bar and header over scrolling content.",
+      "Apply glass overlay on the hero balance card over the abstract pink gradient background.",
+      "Use glass for floating action buttons (FAB) layered over lists."
+    ],
+    "dont's": [
+      "Do not blur standard list rows or form inputs.",
+      "Do not use glass effects without a properly tinted underlying base to ensure text readability."
+    ]
+  },
+  "platform_libraries": {
+    "glass": {
+      "ios": "expo-glass-effect",
+      "android": "expo-blur",
+      "low_end_android_fallback": "solid surfaceSecondary"
+    },
+    "image": "expo-image",
+    "blur": "expo-blur",
+    "bottom_sheet": "@gorhom/bottom-sheet",
+    "animation": "react-native-reanimated",
+    "gesture": "react-native-gesture-handler"
+  },
+  "screens": [
+    {
+      "name": "Dashboard (Inicio)",
+      "purpose": "A welcoming, high-end overview of available money, income/expenses, and the 50/30/20 budget method progress.",
+      "states": {
+        "loading": "Centered soft pink spinner with elegant fade-in.",
+        "empty": "Should not be entirely empty, but 0 balance shows a motivational soft message like '¡Comienza tu viaje financiero hoy! 💗'.",
+        "error": "Soft error toast with a retry button in brandPrimary."
+      },
+      "layout": "Top: Glassmorphic sticky header greeting the user. Hero: A large, beautifully rounded card featuring the total balance over a subtle pink/rose-gold abstract gradient background, with glassmorphism overlay. Below hero: A 3-column pill/chip layout for the 50/30/20 budget breakdown (Necesidades, Gustos, Ahorro) with mini progress bars. Bottom: Contextual financial tip card ('Vas muy bien este mes 💗')."
+    },
+    {
+      "name": "Movimientos",
+      "purpose": "A clear, easily scannable list of income and expenses organized by month.",
+      "states": {
+        "loading": "Skeleton rows with a soft shimmer.",
+        "empty": "Illustration of an elegant empty wallet with text 'Aún no hay movimientos este mes'.",
+        "error": "Error message with a 'Reintentar' button."
+      },
+      "layout": "Top: A horizontal, scrollable month/year selector (Enero 2026, Febrero 2026) acting as a sticky filter. Below: Search bar (rounded pill). Main content: Transaction list grouped by date. Rows use clear emojis (🏠, 🍔) inside a brandTertiary tinted circle, transaction name, and amount formatted in COP ($4.000.000). Green for income, dark text for expenses."
+    },
+    {
+      "name": "Metas (Goals)",
+      "purpose": "Visual, highly motivating grid showing progress toward savings goals.",
+      "states": {
+        "loading": "Skeleton grid cards.",
+        "empty": "Illustration of a shopping bag with text '¿Qué sueño quieres cumplir? Crea tu primera meta'.",
+        "error": "Standard error toast."
+      },
+      "layout": "2-column grid layout with generous gap. Each card represents a goal (Viaje ✈️, iPhone 📱) featuring a circular progress ring, the total accumulated, and the target amount. Cards should have soft shadows and white backgrounds."
+    },
+    {
+      "name": "Perfil",
+      "purpose": "Personalized user settings, statistics, and financial calendar.",
+      "states": {
+        "loading": "Spinner.",
+        "empty": "N/A",
+        "error": "N/A"
+      },
+      "layout": "Top: Hero section with a luxury lifestyle portrait as the background banner, layered with a gradient-to-dark scrim, and the user's avatar/initials layered on top. List below: Stats (Pie charts/line charts), Financial Calendar, and App Settings (Dark Mode toggle). List rows should have a trailing chevron."
+    },
+    {
+      "name": "Add Transaction (Bottom Sheet)",
+      "purpose": "Frictionless, thumb-friendly entry for adding income or expenses.",
+      "states": {
+        "loading": "Button shows spinner when saving.",
+        "empty": "N/A",
+        "error": "Validation errors below inputs in error color."
+      },
+      "layout": "Invoked via a central FAB in the bottom tab bar. Full-width, large inputs. A toggle for Ingreso/Gasto. Horizontal scrollable list of category chips (Vivienda, Comida, etc.). A massive, sticky primary CTA at the bottom ('Guardar')."
+    }
+  ],
+  "images": {
+    "dashboard_hero_bg": {
+      "url": "https://images.unsplash.com/photo-1657624332868-2159deacefa9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDV8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMHNvZnQlMjBwaW5rJTIwcm9zZSUyMGdvbGQlMjBncmFkaWVudCUyMHRleHR1cmV8ZW58MHx8fHwxNzg4ODk3NTE4fDA&ixlib=rb-4.1.0&q=85",
+      "dark": "https://images.unsplash.com/photo-1605184861755-8f190fea96a5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDV8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMHNvZnQlMjBwaW5rJTIwcm9zZSUyMGdvbGQlMjBncmFkaWVudCUyMHRleHR1cmV8ZW58MHx8fHwxNzg4ODk3NTE4fDA&ixlib=rb-4.1.0&q=85",
+      "alt": "Soft pink and peach abstract background"
+    },
+    "empty_transactions": {
+      "url": "https://images.unsplash.com/photo-1634474588488-9107cd14e9f5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzJ8MHwxfHNlYXJjaHwyfHxtaW5pbWFsaXN0JTIwZWxlZ2FudCUyMGVtcHR5JTIwd2FsbGV0JTIwb3IlMjBzaG9wcGluZyUyMGJhZ3xlbnwwfHx8fDE3ODg4OTc1MTh8MA&ixlib=rb-4.1.0&q=85",
+      "alt": "Minimalist elegant pink wallet"
+    },
+    "profile_banner": {
+      "url": "https://images.unsplash.com/photo-1770235623084-7fde436a781d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzR8MHwxfHNlYXJjaHwyfHxsdXh1cnklMjBtb2Rlcm4lMjBmZW1pbmluZSUyMGxpZmVzdHlsZSUyMHBvcnRyYWl0fGVufDB8fHx8MTc4ODg5NzUxOHww&ixlib=rb-4.1.0&q=85",
+      "alt": "Luxury modern feminine lifestyle portrait"
+    }
+  },
+  "instructions_to_main_agent": [
+    "IMPLEMENT DARK MODE strictly using the tokens provided in 'dark_mode_colors_instruction'. Avoid pure black; use deep plum/charcoal tones.",
+    "No indigo, blue, or generic purple gradients allowed. Stick strictly to the elegant hot pink, soft rose, and blush cream palette.",
+    "Typography: Use Fraunces for large display headings (balances, screen titles) and Manrope for all UI text, labels, and lists. Never use bold weights for Fraunces; use size for hierarchy.",
+    "Format all currency in COP with dots as thousand separators (e.g., $4.000.000).",
+    "Use emojis as category icons (🏠, 🍔, 🚗) placed inside a circular container tinted with brandTertiary, to keep the UI friendly for non-tech-savvy users.",
+    "The central Add Transaction FAB should use a glassmorphic layer and sit prominently in the bottom tab bar.",
+    "Always apply a top-to-bottom gradient scrim (transparent to surfaceInverse) over background images (e.g., hero card, profile banner) before placing text on top.",
+    "Ensure all buttons are massive and thumb-friendly (min 56pt height) to accommodate the iPhone 16 Pro Max screen size.",
+    "Add contextual success toasts with emojis (e.g., '💗 Gasto guardado') using the toast pattern described in the guidelines."
+  ],
+  "haptics": {
+    "tab_press": "light",
+    "button_press": "medium",
+    "transaction_save": "success",
+    "toggle_switch": "light"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "summary": "Frontend-only smoke + core flow test of PinkBudget Expo app. Dashboard renders, FAB opens Add Transaction, expense + income saves & updates hero balance/budget cards, AsyncStorage persists across reload, COP formatting correct ($400.000, $2.000.000). Not all screens (Movimientos filter chips, Metas creation, Goal detail deposit, Budget Config presets/validation, Theme toggle, Perfil save, month-switch history) were exercised in-depth due to token budget — but no red screens and all critical testIDs on Dashboard + Add Transaction resolved.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Dashboard MonthSelector", "issues": ["After adding a transaction dated in current month (Sep 2026), the visible chips scroll-position shows Jun/Jul/Ago 2025 chips instead of centering on the selected Sep 2026 chip. Range generation likely spans ~15 months back from earliest but auto-scroll to selected does not fire. Selected chip should be scrolled into view."]}
+    ],
+    "react_native_issues": [
+      {"component": "global styles", "issue": "Console warnings: 'shadow*' style props are deprecated (use boxShadow) and 'props.pointerEvents is deprecated' — non-blocking but should be cleaned up before RN 0.76+ upgrade."}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Fix MonthSelector: auto-scroll the currently selected month chip into view on mount and when `selected` changes (use ScrollView ref + scrollTo based on index).",
+    "Replace deprecated shadow* props with boxShadow and remove props.pointerEvents usage to silence RN Web warnings.",
+    "Extend test coverage in next iteration: Movimientos search/filter, Metas creation + Goal Detail deposit, Budget Config sum-100 validation & preset apply, Theme toggle persistence, Perfil name save, cross-month permanent history (add tx then switch to prev month chip and verify 0 while current month retains value)."
+  ],
+  "critical_code_review_comments": [
+    "AppContext.tsx (~316 lines) is fine but the addExpense/addIncome logic duplicates month/year derivation — extract a helper `deriveDate(iso)` to reduce DRY.",
+    "storage persistence writes on every state change without debounce — for large histories this may hit AsyncStorage on every keystroke of profile.name. Consider debouncing setItem 300ms."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "~70% (core Dashboard + Add Transaction + persistence verified; secondary screens not exercised this run)"},
+  "seed_data_creation": "1 test expense (comida, efectivo, $400.000) and 1 test income ($2.000.000) added to AsyncStorage under key 'pinkbudget:v1' in the preview browser session. Not cleared.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Preview URL: https://smart-savings-206.preview.emergentagent.com. Use viewport 390x844. testIDs verified working: dashboard-balance, dashboard-income, dashboard-expense, budget-card-needs/wants/savings, add-transaction-fab, amount-input, toggle-expense, toggle-income, cat-comida, pay-efectivo, save-transaction-btn, edit-budget-btn. Amount input takes raw digits (keyboardType number-pad). MonthSelector auto-scroll-to-selected is broken — cover this in next iteration. AsyncStorage state persists on reload confirmed.",
+  "rca_of_issue": "MonthSelector chip scroll: `months` array in Dashboard is built from earliest transaction month via `generateMonthRange(earliest)` and passed to MonthSelector. When selected=currentMonthKey() but chips have grown to include many past months, the ScrollView never programmatically scrolls to the selected chip index, so user sees leftmost (oldest) chips instead of the highlighted current one. Fix: in MonthSelector, add useRef + useEffect on `selected` change to call scrollRef.current.scrollTo({x: index * (chipWidth+gap), animated: true})."
+}
